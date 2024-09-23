@@ -1,9 +1,9 @@
 import funciones_scraping as fs
 
 website = 'https://www.yogonet.com/international/'
-path = r'C:\Users\emili\Desktop\codigo_juanchi\chromedriver-win64\chromedriver.exe'
 
-driver = fs.iniciar_driver(path)
+# Llamada a la función sin necesidad de especificar la ruta del ChromeDriver
+driver = fs.iniciar_driver()
 
 try:
     title, image_url, article_url, first_paragraph = fs.extraer_datos(driver, website)
