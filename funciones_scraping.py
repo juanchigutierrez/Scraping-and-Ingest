@@ -6,6 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import os
 import pandas as pd
+from google.cloud import bigquery
+import pandas_gbq
 
 def iniciar_driver():
     service = Service(ChromeDriverManager().install())
@@ -83,3 +85,26 @@ def crear_dataframe(title, image_url, article_url, first_paragraph):
 
 def guardar_csv(df, filename='resultados.csv'):
     df.to_csv(filename, index=False)
+
+
+def guardar_en_bigquery(df, project_id='project_id', dataset_id='dataset_id', table_id='table_id'):
+    """
+    Guarda un DataFrame en una tabla de BigQuery.
+    
+    Args:
+    df (pd.DataFrame): El DataFrame con los datos a subir.
+    project_id (str): El ID del proyecto de Google Cloud.
+    dataset_id (str): El ID del dataset en BigQuery.
+    table_id (str): El ID de la tabla en la que se guardarán los datos.
+    """
+    try:
+        # Construir el nombre completo de la tabla
+        table_full_id = f'{project_id}.{dataset_id}.{table_id}'
+        
+        # Subir el DataFrame a BigQuery usando pandas_gbq
+        pandas_gbq.to_gbq(df, table_full_id, project_id=project_id, if_exists='append')
+
+        print(f"Datos guardados exitosamente en {table_full_id}")
+
+    except Exception as e:
+        print(f"Ocurrió un error al guardar en BigQuery: {e}")
