@@ -8,7 +8,7 @@ Este proyecto realiza scraping de datos desde una página web de noticias y alma
 
 1. **Scraping de datos web**: 
    - Extrae el título, la imagen, el enlace del artículo, y el primer párrafo de la noticia más destacada desde un sitio web.
-   - Procesa la información para calcular el número de palabras y caracteres en el título, así como una lista de palabras capitalizadas que contiene ell título.
+   - Procesa la información para calcular el número de palabras y caracteres en el título, así como una lista de palabras capitalizadas que contiene el título.
 
 2. **Almacenamiento en BigQuery**: 
    - Guarda los datos extraídos en una tabla de BigQuery.
